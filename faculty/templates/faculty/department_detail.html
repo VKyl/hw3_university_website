@@ -1,0 +1,29 @@
+{% extends 'faculty/layout.html' %}
+{% block title %}{{ department.name }}{% endblock %}
+{% block content %}
+<p><a href="{% url 'departments' %}">← Усі кафедри</a></p>
+<h1>{{ department.name }}</h1>
+<p>Завідувач кафедри: {{ department.head.name }}</p>
+
+<section class="card">
+  <h2>Спеціальності</h2>
+  <ul>
+    {% for program in department.programs.all %}
+      <li><a href="{% url 'program_details' program.pk %}">{{ program.code }} {{ program.name }}</a></li>
+    {% empty %}
+      <li class="muted">Немає спеціальностей.</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Викладачі</h2>
+  <ul>
+    {% for tutor in department.tutors.all %}
+      <li><strong>{{ tutor.name }}</strong> — {{ tutor.get_position_display }}, {{ tutor.get_degree_display }}</li>
+    {% empty %}
+      <li class="muted">Викладачів поки немає.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

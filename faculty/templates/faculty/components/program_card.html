@@ -1,0 +1,7 @@
+<article class="card">
+  <h2><a href="{% url 'program_details' program.pk %}">{{ program.name }}</a></h2>
+  <p class="muted">Код: {{ program.code }}</p>
+  <p>{{ program.description|truncatewords:50 }}</p>
+  <p>Координатор набору: {{ program.coordinator.name }},
+    <a href="mailto:{{ program.coordinator.email }}">{{ program.coordinator.email }}</a></p>
+</article>

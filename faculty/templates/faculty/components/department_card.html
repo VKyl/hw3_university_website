@@ -1,0 +1,12 @@
+<article class="card">
+  <h2><a href="{% url 'department_details' department.pk %}">{{ department.name }}</a></h2>
+  <p>Завідувач кафедри: {{ department.head.name }}</p>
+  <p>Випускає за спеціальностями:</p>
+  <ul>
+    {% for program in department.programs.all %}
+      <li><a href="{% url 'program_details' program.pk %}">{{ program.code }} {{ program.name }}</a></li>
+    {% empty %}
+      <li class="muted">Немає спеціальностей.</li>
+    {% endfor %}
+  </ul>
+</article>

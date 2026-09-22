@@ -13,14 +13,13 @@ class TutorPosition(models.TextChoices):
     ASSOCIATE_PROFESSOR = 'DOC', 'Доцент'
     SENIOR_LECTURER = 'SLEC', 'Старший викладач'
     LECTURER_ASSISTANT = 'LEC', 'Викладач та асистент'
-    HEAD_OF_CATHEDRA = 'HEAD', 'Завідувач кафедри'
+    HEAD_OF_DEPARTAMENT = 'HEAD', 'Завідувач кафедри'
     DEAN = 'DEAN', 'Декан'
     RECTOR = 'RECT', 'Ректор'
 
 class Department(models.Model):
     id = models.AutoField(primary_key=True, unique=True)    
     name = models.CharField(max_length=255)
-    head_of_department = models.CharField(max_length=255)
 
 class Tutor(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
@@ -28,7 +27,7 @@ class Tutor(models.Model):
     name = models.CharField(max_length=255)
     degree = models.CharField(max_length=32, choices=Degree.choices)
     position = models.CharField(max_length=32, choices=TutorPosition.choices)
-    cathedra = models.ForeignKey(Department, on_delete=models.PROTECT)
+    departament = models.ForeignKey(Department, on_delete=models.PROTECT)
 
     def __str__(self):
         return f'{self.degree} {self.name}'.capitalize()

@@ -1,0 +1,10 @@
+{% extends 'faculty/layout.html' %}
+{% block title %}Кафедри{% endblock %}
+{% block content %}
+<h1>Кафедри</h1>
+{% for department in departments %}
+  {% include 'faculty/components/department_card.html' with department=department %}
+{% empty %}
+  <p class="muted">Кафедр поки немає.</p>
+{% endfor %}
+{% endblock %}

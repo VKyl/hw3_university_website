@@ -1,0 +1,22 @@
+:root {
+  --purple: #4c217b;
+  --purple-dark: #331754;
+  --purple-light: #a678d4;
+  --purple-tint: #f3edf9;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; color: #1c2430; background: #f5f6f9; display: flex; flex-direction: column; min-height: 100vh; }
+a { color: var(--purple); }
+.header { background: var(--purple); color: #fff; }
+.header__inner, .footer__inner, .main { max-width: 960px; margin: 0 auto; padding: 0 16px; width: 100%; }
+.header__inner { display: flex; align-items: center; gap: 24px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+.logo { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 600; }
+.logo img { height: 48px; width: 48px; }
+.nav { display: flex; gap: 16px; margin-left: auto; }
+.nav a { color: #fff; text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav a:hover, .nav a.active { border-color: var(--purple-light); }
+.main { flex: 1; padding-top: 24px; padding-bottom: 32px; }
+.card { background: #fff; border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.card h2, .card h3 { margin-top: 0; }
+.muted { color: #5b6674; }
+.footer { background: var(--purple-dark); color: var(--purple-tint); padding: 16px 0; text-align: center; font-size: 14px; }
