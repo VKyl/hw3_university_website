@@ -6,4 +6,9 @@ class ProgramRepository:
         return Program.objects.select_related('coordinator', 'department')
 
     def get_by_id(self, id):
-        return Program.objects.select_related('coordinator', 'department').filter(pk=id).first()
+        return (
+            Program.objects.select_related('coordinator', 'department')
+            .prefetch_related('subjects')
+            .filter(pk=id)
+            .first()
+        )

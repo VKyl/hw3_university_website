@@ -18,8 +18,15 @@ class TutorPosition(models.TextChoices):
     RECTOR = 'RECT', 'Ректор'
 
 class Department(models.Model):
-    id = models.AutoField(primary_key=True, unique=True)    
+    id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=255)
+
+    @property
+    def head(self):
+        return self.tutors.filter(position=TutorPosition.HEAD_OF_DEPARTAMENT).first()
+
+    def __str__(self):
+        return self.name
 
 class Tutor(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
@@ -27,7 +34,7 @@ class Tutor(models.Model):
     name = models.CharField(max_length=255)
     degree = models.CharField(max_length=32, choices=Degree.choices)
     position = models.CharField(max_length=32, choices=TutorPosition.choices)
-    departament = models.ForeignKey(Department, on_delete=models.PROTECT)
+    departament = models.ForeignKey(Department, on_delete=models.PROTECT, related_name='tutors')
 
     def __str__(self):
         return f'{self.degree} {self.name}'.capitalize()
@@ -38,10 +45,19 @@ class Program(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=False)
     coordinator = models.ForeignKey(Tutor, on_delete=models.PROTECT)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='programs')
 
     def __str__(self):
         return f'{self.code} {self.name}'.capitalize()
+
+class Subject(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    name = models.CharField(max_length=255)
+    year = models.PositiveSmallIntegerField()
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='subjects')
+
+    def __str__(self):
+        return self.name
 
 class IndexPage(models.Model):
     title = models.CharField(max_length=200)

@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import IndexPage, Program, Department, Tutor
+from .models import IndexPage, ContactEmail, Program, Subject, Department, Tutor
 
 admin.site.register(IndexPage)
+admin.site.register(ContactEmail)
 admin.site.register(Program)
+admin.site.register(Subject)
 admin.site.register(Department)
 admin.site.register(Tutor)
-
