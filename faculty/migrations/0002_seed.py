@@ -217,17 +217,17 @@ SUBJECTS = {
 }
 
 
-def seed(apps, schema_editor):
+def seed_departments(apps):
     Department = apps.get_model('faculty', 'Department')
-    Tutor = apps.get_model('faculty', 'Tutor')
-    Program = apps.get_model('faculty', 'Program')
-    IndexPage = apps.get_model('faculty', 'IndexPage')
-    ContactEmail = apps.get_model('faculty', 'ContactEmail')
-    Subject = apps.get_model('faculty', 'Subject')
 
     departments = {}
     for name in DEPARTMENTS:
         departments[name], _ = Department.objects.get_or_create(name=name)
+    return departments
+
+
+def seed_tutors(apps, departments):
+    Tutor = apps.get_model('faculty', 'Tutor')
 
     tutors = {}
     for tutor in TUTORS:
@@ -240,6 +240,11 @@ def seed(apps, schema_editor):
                 'departament': departments[tutor['departament']],
             },
         )
+    return tutors
+
+
+def seed_programs(apps, departments, tutors):
+    Program = apps.get_model('faculty', 'Program')
 
     programs = {}
     for program in PROGRAMS:
@@ -252,6 +257,11 @@ def seed(apps, schema_editor):
                 'department': departments[program['department']],
             },
         )
+    return programs
+
+
+def seed_subjects(apps, programs):
+    Subject = apps.get_model('faculty', 'Subject')
 
     for code, subjects in SUBJECTS.items():
         for year, name in subjects:
@@ -260,6 +270,11 @@ def seed(apps, schema_editor):
                 name=name,
                 defaults={'year': year},
             )
+
+
+def seed_index_page(apps):
+    IndexPage = apps.get_model('faculty', 'IndexPage')
+    ContactEmail = apps.get_model('faculty', 'ContactEmail')
 
     page, _ = IndexPage.objects.get_or_create(
         title=INDEX_PAGE['title'],
@@ -271,6 +286,14 @@ def seed(apps, schema_editor):
             email=contact['email'],
             defaults={'name': contact['name'], 'page': page},
         )
+
+
+def seed(apps, schema_editor):
+    departments = seed_departments(apps)
+    tutors = seed_tutors(apps, departments)
+    programs = seed_programs(apps, departments, tutors)
+    seed_subjects(apps, programs)
+    seed_index_page(apps)
 
 
 def unseed(apps, schema_editor):
