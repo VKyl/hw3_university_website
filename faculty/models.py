@@ -79,8 +79,9 @@ class ContactEmail(models.Model):
 class ExchangeProgram(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     university = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
     languages = models.CharField(max_length=255)
-    places = models.CharField(max_length=255)
+    places = models.PositiveSmallIntegerField()
     deadline = models.DateField()
     description = models.TextField()
 
