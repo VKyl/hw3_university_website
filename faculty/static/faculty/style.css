@@ -19,4 +19,7 @@ a { color: var(--purple); }
 .card { background: #fff; border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 .card h2, .card h3 { margin-top: 0; }
 .muted { color: #5b6674; }
+.pill { display: inline-block; padding: 2px 12px; border-radius: 999px; font-size: 14px; font-weight: 600; }
+.pill--open { background: #dff3e4; color: #17663a; }
+.pill--closed { background: #fbe1e1; color: #a12020; }
 .footer { background: var(--purple-dark); color: var(--purple-tint); padding: 16px 0; text-align: center; font-size: 14px; }

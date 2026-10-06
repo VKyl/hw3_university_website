@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Degree(models.TextChoices):
     BACHELOR = 'BA', 'Бакалавр'
@@ -84,6 +85,10 @@ class ExchangeProgram(models.Model):
     places = models.PositiveSmallIntegerField()
     deadline = models.DateField()
     description = models.TextField()
+
+    @property
+    def is_open(self):
+        return timezone.localdate() <= self.deadline
 
     def __str__(self):
         return self.university
