@@ -2,9 +2,11 @@ from django.http import Http404
 from django.shortcuts import render
 
 from .repositories.department import DepartmentRepository
+from .repositories.exchange_program import ExchangeProgramRepository
 from .repositories.index_page import IndexPageRepository
 from .repositories.program import ProgramRepository
 from .usecases.department import DepartmentNotFoundError, DepartmentUsecase
+from .usecases.exchange_program import ExchangeProgramUsecase
 from .usecases.index_page import IndexPageUsecase
 from .usecases.program import ProgramNotFoundError, ProgramUsecase
 
@@ -38,3 +40,8 @@ def department_detail(request, id):
     except DepartmentNotFoundError:
         raise Http404('Кафедру не знайдено')
     return render(request, 'faculty/department_detail.html', {'department': department})
+
+
+def exchange_programs(request):
+    exchange_programs = ExchangeProgramUsecase(ExchangeProgramRepository()).get_all()
+    return render(request, 'faculty/exchange_programs.html', {'exchange_programs': exchange_programs})

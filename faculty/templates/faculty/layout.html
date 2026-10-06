@@ -18,6 +18,7 @@
         <a href="{% url 'index' %}" {% if request.path == '/' %}class="active"{% endif %}>Головна</a>
         <a href="{% url 'programs' %}" {% if '/programs/' in request.path %}class="active"{% endif %}>Спеціальності</a>
         <a href="{% url 'departments' %}" {% if '/departments/' in request.path %}class="active"{% endif %}>Кафедри</a>
+        <a href="{% url 'exchange_programs' %}" {% if '/exchange/' in request.path %}class="active"{% endif %}>Програми обміну</a>
       </nav>
     </div>
   </header>

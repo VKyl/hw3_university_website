@@ -1,0 +1,8 @@
+<article class="card">
+  <h2>{{ exchange_program.university }}</h2>
+  <p>Країна: {{ exchange_program.country }}</p>
+  <p class="muted">Дедлайн подачі: {{ exchange_program.deadline|date:"d.m.Y" }}</p>
+  <p>Мови навчання: {{ exchange_program.languages }}</p>
+  <p>Кількість місць: {{ exchange_program.places }}</p>
+  <p>{{ exchange_program.description }}</p>
+</article>

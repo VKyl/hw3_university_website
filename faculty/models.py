@@ -75,3 +75,14 @@ class ContactEmail(models.Model):
     )
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255)
+
+class ExchangeProgram(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    university = models.CharField(max_length=255)
+    languages = models.CharField(max_length=255)
+    places = models.CharField(max_length=255)
+    deadline = models.DateField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.university
