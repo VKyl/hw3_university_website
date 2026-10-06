@@ -1,0 +1,10 @@
+{% extends 'faculty/layout.html' %}
+{% block title %}Програми обміну{% endblock %}
+{% block content %}
+<h1>Програми обміну</h1>
+{% for exchange_program in exchange_programs %}
+  {% include 'faculty/components/exchange_program_card.html' with exchange_program=exchange_program %}
+{% empty %}
+  <p class="muted">Програм обміну поки немає.</p>
+{% endfor %}
+{% endblock %}

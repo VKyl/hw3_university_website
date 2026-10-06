@@ -1,0 +1,34 @@
+{% load static %}<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Факультет інформатики{% endblock %} - НаУКМА</title>
+  <link rel="icon" href="{% static 'faculty/logo.jpeg' %}">
+  <link rel="stylesheet" href="{% static 'faculty/style.css' %}">
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <a class="logo" href="{% url 'index' %}">
+        <img src="{% static 'faculty/logo.jpeg' %}" alt="Логотип ФІ НаУКМА">
+        <span>Факультет інформатики</span>
+      </a>
+      <nav class="nav">
+        <a href="{% url 'index' %}" {% if request.path == '/' %}class="active"{% endif %}>Головна</a>
+        <a href="{% url 'programs' %}" {% if '/programs/' in request.path %}class="active"{% endif %}>Спеціальності</a>
+        <a href="{% url 'departments' %}" {% if '/departments/' in request.path %}class="active"{% endif %}>Кафедри</a>
+        <a href="{% url 'exchange_programs' %}" {% if '/exchange/' in request.path %}class="active"{% endif %}>Програми обміну</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">2026 Website created by Viktor Kyliukh AM4 student</div>
+  </footer>
+</body>
+</html>

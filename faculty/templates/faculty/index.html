@@ -1,0 +1,19 @@
+{% extends 'faculty/layout.html' %}
+{% block title %}Головна{% endblock %}
+{% block content %}
+<h1>{{ page.title|default:"Факультет інформатики НаУКМА" }}</h1>
+
+<section class="card">
+  <h2>Про факультет</h2>
+  {% if page.description %}{{ page.description|linebreaks }}{% else %}<p class="muted">Опис факультету ще не додано.</p>{% endif %}
+</section>
+
+<section class="card">
+  <h2>Контакти</h2>
+  {% for contact in page.contacts.all %}
+    <p><strong>{{ contact.name }}</strong><br><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+  {% empty %}
+    <p class="muted">Контактів поки немає.</p>
+  {% endfor %}
+</section>
+{% endblock %}

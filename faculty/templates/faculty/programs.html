@@ -1,0 +1,10 @@
+{% extends 'faculty/layout.html' %}
+{% block title %}Спеціальності{% endblock %}
+{% block content %}
+<h1>Спеціальності</h1>
+{% for program in programs %}
+  {% include 'faculty/components/program_card.html' with program=program %}
+{% empty %}
+  <p class="muted">Спеціальностей поки немає.</p>
+{% endfor %}
+{% endblock %}

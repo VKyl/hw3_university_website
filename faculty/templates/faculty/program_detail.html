@@ -1,0 +1,30 @@
+{% extends 'faculty/layout.html' %}
+{% block title %}{{ program.name }}{% endblock %}
+{% block content %}
+<p><a href="{% url 'programs' %}">← Усі спеціальності</a></p>
+<h1>{{ program.name }}</h1>
+<p class="muted">Код: {{ program.code }}</p>
+
+<section class="card">
+  <h2>Опис</h2>
+  {{ program.description|linebreaks }}
+</section>
+
+<section class="card">
+  <h2>Координатор набору</h2>
+  <p>{{ program.coordinator.name }},
+    <a href="mailto:{{ program.coordinator.email }}">{{ program.coordinator.email }}</a></p>
+  <p>Кафедра: <a href="{% url 'department_details' program.department.pk %}">{{ program.department.name }}</a></p>
+</section>
+
+<section class="card">
+  <h2>Дисципліни</h2>
+  <ul>
+    {% for subject in program.subjects.all %}
+      <li>{{ subject.name }}</li>
+    {% empty %}
+      <li class="muted">Список дисциплін ще не додано.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}
